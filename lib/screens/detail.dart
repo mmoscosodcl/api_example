@@ -21,7 +21,7 @@ class DetailScreen extends StatelessWidget {
           children: [
             if (media.image?.original != null)
               Center(
-                child: Image.network(media.image!.original!, height: 250, fit: BoxFit.cover),
+                child: Image.network(media.image!.original!.url, height: 250, fit: BoxFit.cover),
               ),
             const SizedBox(height: 16),
             Text(media.name, style: Theme.of(context).textTheme.headlineSmall),
@@ -50,10 +50,12 @@ class DetailScreen extends StatelessWidget {
                     itemCount: images.length,
                     itemBuilder: (context, index) {
                       final img = images[index];
+                      final url = img.medium?.url ?? img.original?.url;
+                      print('Image URL: $url');
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: img.medium != null
-                          ? Image.network(img.medium!, width: 100, fit: BoxFit.cover)
+                        child: url != null
+                          ? Image.network(url, width: 100, fit: BoxFit.cover)
                           : const Icon(Icons.image_not_supported, size: 100),
                       );
                     },

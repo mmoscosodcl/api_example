@@ -1,0 +1,11 @@
+{
+  "title": "APP Ejemplo API",
+  "homeTitle":"Inicio",
+  "favTitle":"Favoritos",
+  "searchButton":"Buscar",
+  "noResults":"No se encontraron resultados",
+  "helloWorld": "Hola Mundo",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}

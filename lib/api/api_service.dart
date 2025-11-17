@@ -10,6 +10,7 @@ class ApiService {
     final response = await http.get(Uri.parse('$baseUrl/search/shows?q=$query'));
     if (response.statusCode == 200) {
       final List data = json.decode(response.body);
+      print('Raw search data: $data');
       return data.map<Media>((item) => Media.fromJson(item['show'])).toList();
     } else {
       throw Exception('Failed to load shows');
@@ -41,6 +42,9 @@ class ApiService {
     final response = await http.get(Uri.parse('$baseUrl/shows/$id/images'));
     if (response.statusCode == 200) {
       final List data = json.decode(response.body);
+      print('Raw image data: $data');
+      print('Number of images: ${data.length}');
+
       return data.map<MediaImage>((item) => MediaImage.fromJson(item)).toList();
     } else {
       throw Exception('Failed to get show images');

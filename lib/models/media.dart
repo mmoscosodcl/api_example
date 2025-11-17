@@ -156,15 +156,51 @@ class Externals {
 }
 
 class MediaImage {
-  final String? medium;
-  final String? original;
+  final int id;
+  final String type;
+  final bool main;
+  final ImageResolution? original;
+  final ImageResolution? medium;
 
-  MediaImage({this.medium, this.original});
+  MediaImage({
+    required this.id,
+    required this.type,
+    required this.main,
+    this.original,
+    this.medium,
+  });
 
   factory MediaImage.fromJson(Map<String, dynamic> json) {
     return MediaImage(
-      medium: json['medium'],
-      original: json['original'],
+      id: json['id'] ?? 0, // Provide a default value if null
+      type: json['type'] ?? '',
+      main: json['main'] ?? false,
+      original: json['resolutions']?['original'] != null
+          ? ImageResolution.fromJson(json['resolutions']['original'])
+          : null,
+      medium: json['resolutions']?['medium'] != null
+          ? ImageResolution.fromJson(json['resolutions']['medium'])
+          : null,
+    );
+  }
+}
+
+class ImageResolution {
+  final String url;
+  final int width;
+  final int height;
+
+  ImageResolution({
+    required this.url,
+    required this.width,
+    required this.height,
+  });
+
+  factory ImageResolution.fromJson(Map<String, dynamic> json) {
+    return ImageResolution(
+      url: json['url'],
+      width: json['width'],
+      height: json['height'],
     );
   }
 }
